@@ -2,15 +2,36 @@
 
 atomic is a 1KB standalone module for getting a supported XHR instance, making HTTP requests and handling success/error callbacks. atomic has a very clean and readable syntax using Object chaining, as well as automatic JSON parsing when JSON is returned. atomic works in IE6+, but uses native JSON parsing which works in IE8+, so -IE8 won't parse the response.
 
+#### Request Options
+Each request type support an options param for customizing the XHR request.
+Currently the only option supported is `contentType`. Example:
+```js
+var data = {
+  foo: 'bar'
+};
+
+var options = {
+  contentType: 'application/json'
+};
+
+atomic.post('/endpoint', data, options)
+.success(function (data, xhr) {
+
+})
+.error(function (data, xhr) {
+
+});
+```
+
 #### atomic.get()
 Use `atomic.get()` to make a `GET`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
 atomic.get('/endpoint')
 .success(function (data, xhr) {
-  
+
 })
 .error(function (data, xhr) {
-  
+
 });
 ```
 
@@ -19,10 +40,10 @@ Use `atomic.post()` to make a `POST`. Success and error callbacks will return th
 ```js
 atomic.post('/endpoint'[, data])
 .success(function (data, xhr) {
-  
+
 })
 .error(function (data, xhr) {
-  
+
 });
 ```
 
@@ -31,10 +52,10 @@ Use `atomic.put()` to make a `PUT`. Success and error callbacks will return the 
 ```js
 atomic.put('/endpoint'[, data])
 .success(function (data, xhr) {
-  
+
 })
 .error(function (data, xhr) {
-  
+
 });
 ```
 
@@ -43,10 +64,10 @@ Use `atomic.delete()` to make a `DELETE`. Success and error callbacks will retur
 ```js
 atomic.delete('/endpoint')
 .success(function (data, xhr) {
-  
+
 })
 .error(function (data, xhr) {
-  
+
 });
 ```
 
@@ -59,7 +80,7 @@ bower install https://github.com/toddmotto/atomic.git
 
 ## Manual installation
 Ensure you're using the files from the `dist` directory (contains compiled production-ready code). Ensure you place the script before the closing `</body>` tag.
-  
+
 ```html
 <body>
   <!-- html above -->
