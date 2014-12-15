@@ -26,7 +26,7 @@ atomic.post('/endpoint', data, options)
 #### atomic.get()
 Use `atomic.get()` to make a `GET`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.get('/endpoint')
+atomic.get('/endpoint'[, options])
 .success(function (data, xhr) {
 
 })
@@ -38,7 +38,7 @@ atomic.get('/endpoint')
 #### atomic.post()
 Use `atomic.post()` to make a `POST`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.post('/endpoint'[, data])
+atomic.post('/endpoint'[, data]\[, options\])
 .success(function (data, xhr) {
 
 })
@@ -50,7 +50,7 @@ atomic.post('/endpoint'[, data])
 #### atomic.put()
 Use `atomic.put()` to make a `PUT`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.put('/endpoint'[, data])
+atomic.put('/endpoint'[, data]\[, options\])
 .success(function (data, xhr) {
 
 })
@@ -62,7 +62,7 @@ atomic.put('/endpoint'[, data])
 #### atomic.delete()
 Use `atomic.delete()` to make a `DELETE`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.delete('/endpoint')
+atomic.delete('/endpoint'[, options])
 .success(function (data, xhr) {
 
 })
