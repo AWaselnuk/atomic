@@ -38,7 +38,7 @@ atomic.get('/endpoint'[, options])
 #### atomic.post()
 Use `atomic.post()` to make a `POST`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.post('/endpoint'[, data]\[, options\])
+atomic.post('/endpoint'[, data][, options])
 .success(function (data, xhr) {
 
 })
@@ -50,7 +50,7 @@ atomic.post('/endpoint'[, data]\[, options\])
 #### atomic.put()
 Use `atomic.put()` to make a `PUT`. Success and error callbacks will return the `xhr.responseText` and full `xhr` as arguments one and two.
 ```js
-atomic.put('/endpoint'[, data]\[, options\])
+atomic.put('/endpoint'[, data][, options])
 .success(function (data, xhr) {
 
 })
