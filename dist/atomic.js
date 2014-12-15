@@ -13,6 +13,10 @@
 
   var exports = {};
 
+  var globalConfig = {
+    contentType: 'application/x-www-form-urlencoded'
+  };
+
   var parse = function (req) {
     var result;
     try {
@@ -23,7 +27,11 @@
     return [result, req];
   };
 
-  var xhr = function (type, url, data) {
+  var xhr = function (type, url, data, options) {
+    if (options === null || options === undefined) { options = {}; }
+    var requestConfig = {
+      contentType: options.contentType || globalConfig.contentType
+    };
     var methods = {
       success: function () {},
       error: function () {}
@@ -31,10 +39,10 @@
     var XHR = root.XMLHttpRequest || ActiveXObject;
     var request = new XHR('MSXML2.XMLHTTP.3.0');
     request.open(type, url, true);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.setRequestHeader('Content-type', requestConfig.contentType);
     request.onreadystatechange = function () {
       if (request.readyState === 4) {
-        if (request.status === 200) {
+        if (request.status >= 200 && request.status < 300) {
           methods.success.apply(methods, parse(request));
         } else {
           methods.error.apply(methods, parse(request));
@@ -42,32 +50,34 @@
       }
     };
     request.send(data);
-    return {
+    var callbacks = {
       success: function (callback) {
         methods.success = callback;
-        return methods;
+        return callbacks;
       },
       error: function (callback) {
         methods.error = callback;
-        return methods;
+        return callbacks;
       }
     };
+
+    return callbacks;
   };
 
-  exports['get'] = function (src) {
-    return xhr('GET', src);
+  exports['get'] = function (src, options) {
+    return xhr('GET', src, null, options);
   };
 
-  exports['put'] = function (url, data) {
-    return xhr('PUT', url, data);
+  exports['put'] = function (url, data, options) {
+    return xhr('PUT', url, data, options);
   };
 
-  exports['post'] = function (url, data) {
-    return xhr('POST', url, data);
+  exports['post'] = function (url, data, options) {
+    return xhr('POST', url, data, options);
   };
 
-  exports['delete'] = function (url) {
-    return xhr('DELETE', url);
+  exports['delete'] = function (url, options) {
+    return xhr('DELETE', url, null, options);
   };
 
   return exports;
